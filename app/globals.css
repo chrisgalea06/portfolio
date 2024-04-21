@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #15140f;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+
+.wrapper {
+  @apply w-full max-w-[1185px] lg:px-[5px] px-[10px] mx-auto;
+}
+
+.btn {
+  @apply bg-gradient-to-r from-c-bgblue1 to-c-bgblue2 px-7 py-2 rounded-full;
+}
+
+.btn-white {
+  @apply text-white px-7 py-2 rounded-full border-solid border-[1px] border-white;
+}
+
+.bggradient {
+  @apply bg-gradient-to-r from-c-bgblue1 to-c-bgblue2;
+}
+
+.gradientblue {
+  background: linear-gradient(to right, #00b0ed 0%, #061887 80%, #061887 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contentstext h2 {
+  @apply lg:text-[48px] text-[30px]  font-black;
+  background: linear-gradient(to right, #00b0ed 0%, #061887 80%, #061887 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title h3 {
+  background: linear-gradient(to right, #00b0ed 0%, #061887 80%, #061887 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient {
+  border: 1px solid;
+  border-image: linear-gradient(to right, #00b0ed, #061887) 1;
+}
+
+.textgradient {
+  @apply text-[40px] font-black;
+  color: #100f0c;
+  background: linear-gradient(to bottom, #00b0ed 0%, #00b0ed 10%, #061887 100%);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px transparent;
+  /* -webkit-text-fill-color: transparent; */
+}
+
+.responsive {
+  @apply flex flex-col lg:flex-row;
+}
