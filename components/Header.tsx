@@ -4,9 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import { getData } from "../lib/services";
 import { IoMdMenu } from "react-icons/io";
 
 export default function Header() {
@@ -33,16 +31,16 @@ export default function Header() {
 
   return (
     <div
-      className="lg:fixed fixed w-full top-0 py-4 text-white z-20"
+      className="lg:fixed fixed w-full top-0 py-4 text-white z-20 overflow-x-hidden"
       data-aos="fade-down"
       data-aos-delay="300"
       data-aos-duration="1000"
     >
       <div className="wrapper">
         <div className="flex justify-between text-[22px] items-center">
-          {dataGeneral?.logo.data && (
+          {dataGeneral?.logo.data ? (
             <Link href="/">
-              <Image
+              {/* <Image
                 src={`${
                   process.env.URL_MEDIA + dataGeneral?.logo.data.attributes.url
                 }`}
@@ -53,9 +51,10 @@ export default function Header() {
                   `${dataGeneral?.logo.data.attributes.height * 0.6}`
                 )}
                 alt={`${dataGeneral?.title}`}
-              />
+              /> */}
+              <Image src="/images/logo.svg" width={47} height={46} alt="logo" />
             </Link>
-          )}
+          ) : null}
           <div className="hidden lg:flex items-center gap-6">
             <ul className="flex gap-7 font-normal">
               {dataContent?.map((item: any) => {

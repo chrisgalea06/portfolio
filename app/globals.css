@@ -12,6 +12,8 @@ body {
   background: #15140f;
   font-family: "Montserrat", sans-serif;
   color: white;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .wrapper {

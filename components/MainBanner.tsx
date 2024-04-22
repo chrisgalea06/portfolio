@@ -53,10 +53,10 @@ export default function MainBanner() {
               data-aos-delay="300"
               data-aos-duration="1000"
             >
-              <h2 className="lg:text-[48px] text-[28px]">
+              <h2 className="lg:text-[48px] text-[22px]">
                 {dataContent?.welcome_text}
               </h2>
-              <h1 className="gradientblue lg:text-[90px] text-[54px]  font-black leading-[1.1] my-5">
+              <h1 className="gradientblue lg:text-[90px] text-[45px]  font-black leading-[1.1] my-5">
                 {dataContent?.name && parse(`${dataContent?.name}`)}
               </h1>
               <div className="mt-7 mb-11">
@@ -66,13 +66,14 @@ export default function MainBanner() {
               {dataGeneral?.cta_link && (
                 <Link
                   href={`${dataGeneral?.cta_link}`}
-                  className="btn text-[22px]"
+                  className="btn lg:text-[22px] text-[17px]"
                 >
                   {dataGeneral?.cta_label}
                 </Link>
               )}
             </div>
             {dataContent?.image.data && (
+              <div className="max-h-[470px] lg:max-h-none overflow-hidden">
               <Image
                 src={`${
                   process.env.URL_MEDIA + dataContent?.image.data.attributes.url
@@ -86,6 +87,7 @@ export default function MainBanner() {
                 data-aos-delay="300"
                 data-aos-duration="1000"
               />
+              </div>
             )}
           </div>
           <div

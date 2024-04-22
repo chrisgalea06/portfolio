@@ -1,6 +1,6 @@
+import React from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
-
 
 export const metadata = {
   title: "Christopher Galea - Portfolio",
@@ -18,11 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>
-       
-        {children}
-        
-      </body>
+      <body suppressHydrationWarning={true}>{children}</body>
     </html>
   );
 }

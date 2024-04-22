@@ -92,7 +92,7 @@ export default function ListProjects({ amountToShow }: ListProjectsProps) {
     queryFn: getQuery,
   });
 
-  if (query.isLoading) return <Skeleton />;
+  if (query.isLoading) return <></>;
 
   const dataContent = query.data?.data.data.attributes;
   const dataAll = dataContent?.list_portfolio;
