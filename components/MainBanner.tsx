@@ -4,9 +4,9 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import { getData } from "../lib/services";
+import Skeleton from "../components/Skeleton";
+import ErrorNetwork from "../components/errorNetwork";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -73,20 +73,36 @@ export default function MainBanner() {
               )}
             </div>
             {dataContent?.image.data && (
-              <div className="max-h-[470px] lg:max-h-none overflow-hidden">
-              <Image
-                src={`${
-                  process.env.URL_MEDIA + dataContent?.image.data.attributes.url
-                }`}
-                width={parseInt(`${dataContent?.image.data.attributes.width}`)}
-                height={parseInt(
-                  `${dataContent?.image.data.attributes.height}`
-                )}
-                alt="christoper"
+              <div
+                className="max-h-[470px] lg:max-h-none overflow-hidden"
                 data-aos="fade-up"
                 data-aos-delay="300"
                 data-aos-duration="1000"
-              />
+              >
+                {/* <Image
+                  src={`${
+                    process.env.URL_MEDIA +
+                    dataContent?.image.data.attributes.url
+                  }`}
+                  width={parseInt(
+                    `${dataContent?.image.data.attributes.width}`
+                  )}
+                  height={parseInt(
+                    `${dataContent?.image.data.attributes.height}`
+                  )}
+                  alt="christoper"
+                  
+                /> */}
+                <Image
+                  src="/images/chris.svg"
+                  width={parseInt(
+                    `${dataContent?.image.data.attributes.width}`
+                  )}
+                  height={parseInt(
+                    `${dataContent?.image.data.attributes.height}`
+                  )}
+                  alt="Christopher Galea"
+                />
               </div>
             )}
           </div>

@@ -2,9 +2,9 @@
 import React, { ReactNode } from "react";
 import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import { getData } from "../lib/services";
+import Skeleton from "../components/Skeleton";
+import ErrorNetwork from "../components/errorNetwork";
 import Link from "next/link";
 import Image from "next/image";
 import _ from "lodash";
@@ -41,7 +41,6 @@ function ItemProject(props: iItemProject) {
       } gap-14 lg:justify-center my-14 lg:px-0 md:px-16 sm:px-8 px-3`}
     >
       <div
-        className="text-justify"
         data-aos={`${props.odd ? "fade-up-left" : "fade-up-right"}`}
         data-aos-delay="300"
         data-aos-duration="1000"
@@ -49,7 +48,7 @@ function ItemProject(props: iItemProject) {
         <div className="title text-[32px] font-black mb-5">
           <h3>{props.title}</h3>
         </div>
-        {props.children}
+        <div className="text-justify">{props.children}</div>
       </div>
       <div
         className="lg:w-1/2"
@@ -111,7 +110,7 @@ export default function ListProjects({ amountToShow }: ListProjectsProps) {
           <Link
             href="/projects"
             className="hidden lg:block btn-white cursor-pointer hover:bg-gradient-to-r hover:from-[#00B0ED] hover:to-[#061887] hover:border-2 border-black"
-            onClick={() => setLimit(dataAll.length)}
+            //onClick={() => setLimit(dataAll.length)}
           >
             {dataContent?.label_button}
           </Link>
