@@ -5,9 +5,9 @@ import React from "react";
 import { LuDownload } from "react-icons/lu";
 import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import { getData } from "../lib/services";
+import Skeleton from "../components/Skeleton";
+import ErrorNetwork from "../components/errorNetwork";
 import "aos/dist/aos.css";
 
 export default function About() {
@@ -48,9 +48,11 @@ export default function About() {
             data-aos-delay="300"
             data-aos-duration="1000"
           >
-            <h4>{dataContent?.welcome_text}</h4>
+            {/* <h4>{dataContent?.welcome_text}</h4> */}
             <h2>{dataContent?.name}</h2>
-            {dataContent?.description && parse(`${dataContent?.description}`)}
+            <div className="text-justify">
+              {dataContent?.description && parse(`${dataContent?.description}`)}
+            </div>
             <div className="inline-block mt-7">
               {dataContent?.cv && (
                 <Link
