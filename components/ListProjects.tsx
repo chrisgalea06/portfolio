@@ -23,6 +23,7 @@ interface iItemProject {
   imageHeight: number | string;
   children: string | ReactNode;
   odd?: boolean;
+  link: string;
 }
 
 function ItemProject(props: iItemProject) {
@@ -49,6 +50,16 @@ function ItemProject(props: iItemProject) {
           <h3>{props.title}</h3>
         </div>
         <div className="text-justify">{props.children}</div>
+        <div className="pt-5">
+          <a
+            target="_blank"
+            href={props.link}
+            className="btn text-[17px]"
+            rel="noopener noreferrer"
+          >
+            Visit Website
+          </a>
+        </div>
       </div>
       <div
         className="lg:w-1/2"
@@ -130,6 +141,7 @@ export default function ListProjects({ amountToShow }: ListProjectsProps) {
               imageWidth={476}
               title={item.title}
               images={imageUrls} // Pass array of image URLs
+              link={item.LinkButton}
             >
               {parse(`${item.description}`)}
             </ItemProject>

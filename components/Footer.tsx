@@ -25,6 +25,13 @@ export default function Footer() {
 
   return (
     <div className="relative text-white">
+      <Image
+        src="/images/ellipse6.svg"
+        width={805}
+        height={1252}
+        alt="image"
+        className="absolute left-0 bottom-0"
+      />
       <div className="wrapper">
         <div className="responsive justify-between py-14 w-full lg:items-end items-center gap-5 lg:gap-1">
           <div className="text-[14px] lg:order-none order-1">
@@ -56,6 +63,13 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <Image
+        src="/images/ellipse3.svg"
+        width={805}
+        height={1252}
+        alt="image"
+        className="absolute right-0 bottom-0"
+      />
     </div>
   );
 }

@@ -77,7 +77,7 @@ export default function Contact() {
       <div className="wrapper">
         <div
           className="responsive justify-between lg:gap-28 lg:items-end relative lg:px-16 pb-16
-                before:content-[''] before:absolute before:w-full before:h-[70%] before:bg-black before:bottom-0 before:left-0"
+                before:content-[''] before:absolute before:w-full before:h-[70%] before:bg-black before:bottom-0 before:left-0 relative z-10"
         >
           <div className="relative">
             <div className="title text-[48px] lg:text-left text-center font-black mb-5">

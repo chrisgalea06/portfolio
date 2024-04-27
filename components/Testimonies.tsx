@@ -6,9 +6,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import parse from "html-react-parser";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import { getData } from "../lib/services";
+import Skeleton from "../components/Skeleton";
+import ErrorNetwork from "../components/errorNetwork";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { FaStar, FaRegStar } from "react-icons/fa6";
 import Image from "next/image";
@@ -57,7 +57,7 @@ function ItemSlider({
         <Rating rate={rate} /> <div className="text-white">{rate} Star</div>
       </div>
       <div className="relative">
-        <div className="py-5 lg:pr-[160px] lg:text-left text-justify">
+        <div className="py-5 lg:pr-[160px] lg:text-left text-justify px-5">
           {comment ? comment : "comment is empty"}
         </div>
       </div>

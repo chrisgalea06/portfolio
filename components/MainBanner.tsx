@@ -36,7 +36,7 @@ export default function MainBanner() {
   const dataGeneral = query2.data?.data.data.attributes;
 
   return (
-    <div className="relative text-white min-h-screen  flex items-center w-full overflow-hidden lg:pt-[130px] pt-[90px] pb-14">
+    <div className="relative text-white min-h-screen flex items-center w-full overflow-hidden lg:pt-[130px] pt-[90px] pb-14">
       <div className="w-full h-full">
         <Image
           src="/images/ellipse1.svg"
@@ -107,22 +107,22 @@ export default function MainBanner() {
             )}
           </div>
           <div
-            className="w-full min-h-[70px] bg-gradient-to-r from-[#171610] to-[#14383F] text-white p-7 border-solid border-[#171610] border-[1px] responsive items-center justify-around"
+            className="w-full min-h-[70px] bg-gradient-to-r from-[#171610] to-[#14383F] text-white p-7 border-solid border-[#171610] border-[1px] responsive2 items-center justify-around"
             data-aos="fade-down"
             data-aos-delay="300"
             data-aos-duration="1000"
             data-aos-offset="-1000"
           >
-            <div className="text-white text-center lg:text-left responsive [&_h4]:font-bold [&_h4]:text-[60px] items-center gap-5">
+            <div className="text-white text-center md:text-left responsive [&_h4]:font-bold [&_h4]:text-[60px] items-center gap-5">
               <h4>3+</h4>
               <div>Years of Experience</div>
             </div>
-            <div className="relative w-full lg:my-0 my-8 lg:w-[1px] h-[1px] lg:h-[90px] bg-white"></div>
+            <div className="relative w-full md:my-0 my-8 md:w-[1px] h-[1px] md:h-[90px] bg-white"></div>
             <div className="text-white responsive [&_h4]:font-bold [&_h4]:text-[60px] items-center gap-5">
               <h4>5</h4>
               <div>Project Completed</div>
             </div>
-            <div className="relative w-full lg:my-0 my-8 lg:w-[1px] h-[1px] lg:h-[90px] bg-white"></div>
+            <div className="relative w-full md:my-0 my-8 md:w-[1px] h-[1px] md:h-[90px] bg-white"></div>
             <div className="text-white responsive [&_h4]:font-bold [&_h4]:text-[60px] items-center gap-5">
               <h4>5+</h4>
               <div>Happy Clients</div>

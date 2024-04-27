@@ -53,22 +53,22 @@ export default function Home() {
       ) : (
         <Basecontent>
           <Header />
-          <div id="home">
+          <div id="home" className="overflow-x-hidden overflow-y-hidden">
             <MainBanner />
           </div>
-          <div id="about">
+          <div id="about" className="overflow-x-hidden overflow-y-hidden">
             <About />
           </div>
-          <div id="services">
+          <div id="services" className="overflow-x-hidden overflow-y-hidden">
             <Services />
           </div>
-          <div id="testimonies">
+          <div id="testimonies" className="overflow-x-hidden overflow-y-hidden">
             <Testimonies />
           </div>
-          <div id="projects">
+          <div id="projects" className="overflow-x-hidden overflow-y-hidden">
             <ListProjects amountToShow={2} />
           </div>
-          <div id="contact">
+          <div id="contact" className="overflow-x-hidden overflow-y-hidden">
             <Contact />
           </div>
           <Footer />

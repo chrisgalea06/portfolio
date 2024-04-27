@@ -23,7 +23,7 @@ export default function About() {
   const dataContent = query.data?.data.data.attributes;
 
   return (
-    <div className="relative lg:pt-[130px] pt-[90px]">
+    <div className="relative lg:py-[130px] py-[90px] bg-[#100F0C] ">
       <div className="wrapper">
         <div className="responsive justify-between text-white items-center gap-20">
           {dataContent?.image.data && (
