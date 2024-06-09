@@ -6,6 +6,8 @@ const nextConfig = {
     URL_MEDIA: process.env.URL_MEDIA,
     KEY_API: process.env.KEY_API,
     KEY_API_POST: process.env.KEY_API_POST,
+    EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+    EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
   },
   reactStrictMode: true,
   images: {

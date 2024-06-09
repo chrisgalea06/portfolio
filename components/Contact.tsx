@@ -17,6 +17,7 @@ import {
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import axios from "axios";
+import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -48,28 +49,32 @@ export default function Contact() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const sendNow = async () => {
       try {
-        const data = {
-          name: values.name,
-          email: values.email,
+        const emailBody = `
+          Name: ${values.name}\n
+          Email: ${values.email}\n
+          Subject: ${values.subject}\n
+          Message: ${values.message}
+        `;
+  
+        const templateParams = {
+          from_name: values.name,
+          from_email: values.email,
           subject: values.subject,
-          message: values.message,
+          message: emailBody,
+          reply_to: values.email
         };
-        const response = await axios.post(
-          `${process.env.URL_API}/contacts`,
-          {
-            data,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.KEY_API_POST,
-            },
-          }
+
+        await emailjs.send("service_n862uum", "template_3pd20x9", templateParams, {
+          publicKey: process.env.EMAILJS_PUBLIC_KEY,
+        },
         );
+  
         setMessage(true);
       } catch (error) {
         console.error("Error:", error);
       }
     };
+  
     sendNow();
   }
   return (
