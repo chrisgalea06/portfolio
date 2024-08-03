@@ -94,10 +94,10 @@ export default function MainBanner() {
                   
                 /> */}
                 <Image
-                  src="/images/chris.svg"
-                  width={parseInt(
-                    `${dataContent?.image.data.attributes.width}`
-                  )}
+                  src={`${
+                    process.env.URL_MEDIA +
+                    dataContent?.image.data.attributes.url
+                  }`}
                   height={parseInt(
                     `${dataContent?.image.data.attributes.height}`
                   )}
