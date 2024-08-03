@@ -53,7 +53,7 @@ export default function About() {
             <div className="text-justify">
               {dataContent?.description && parse(`${dataContent?.description}`)}
             </div>
-            <div className="inline-block mt-7">
+            {/* <div className="inline-block mt-7">
               {dataContent?.cv && (
                 <Link
                   target="_blank"
@@ -65,7 +65,7 @@ export default function About() {
                   <LuDownload /> Download CV
                 </Link>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
