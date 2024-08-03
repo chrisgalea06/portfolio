@@ -94,13 +94,9 @@ export default function MainBanner() {
                   
                 /> */}
                 <Image
-                  src={`${
-                    process.env.URL_MEDIA +
-                    dataContent?.image.data.attributes.url
-                  }`}
-                  height={parseInt(
-                    `${dataContent?.image.data.attributes.height}`
-                  )}
+                  src="/images/chris2.png"
+                  width="400"
+                  height="675"
                   alt="Christopher Galea"
                 />
               </div>
