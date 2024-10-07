@@ -26,19 +26,40 @@ export default function About() {
     <div className="relative lg:py-[130px] py-[90px] bg-[#100F0C] ">
       <div className="wrapper">
         <div className="responsive justify-between text-white items-center gap-20">
-          {dataContent?.image.data && (
-            <Image
-              src={`${
-                process.env.URL_MEDIA + dataContent?.image.data.attributes.url
-              }`}
-              width={parseInt(`${dataContent?.image.data.attributes.width}`)}
-              height={parseInt(`${dataContent?.image.data.attributes.height}`)}
-              alt="christoper"
-              className="lg:order-1 order-2"
-              data-aos="fade-down"
-              data-aos-delay="300"
-              data-aos-duration="1000"
-            />
+          {dataContent?.image?.data && (
+            <>
+              {/* Construct the image URL */}
+              {(() => {
+                const imagePath = dataContent.image.data.attributes.url;
+                const imageUrl = `${process.env.URL_MEDIA}${imagePath}`;
+                const imageWidth = parseInt(
+                  dataContent.image.data.attributes.width
+                );
+                const imageHeight = parseInt(
+                  dataContent.image.data.attributes.height
+                );
+
+                // Log the details to the console
+                console.log("Base URL:", process.env.URL_MEDIA);
+                console.log("Image Path:", imagePath);
+                console.log("Image Width:", imageWidth);
+                console.log("Image Height:", imageHeight);
+                console.log("Complete Image URL:", imageUrl);
+
+                return (
+                  <Image
+                    src={imageUrl}
+                    width={imageWidth}
+                    height={imageHeight}
+                    alt="christoper"
+                    className="lg:order-1 order-2"
+                    data-aos="fade-down"
+                    data-aos-delay="300"
+                    data-aos-duration="1000"
+                  />
+                );
+              })()}
+            </>
           )}
           <div
             className="relative contentstext flex-1 [&_h4]:font-normal [&_h4]:text-[28px]
