@@ -14,7 +14,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "warm-retreat-17098-a953289b7d41.herokuapp.com",
+        hostname: "admin.christophergalea.com",
         pathname: "**",
       },
     ],
