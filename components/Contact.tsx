@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,6 @@ import { Button } from "../components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,8 +14,7 @@ import {
 } from "../components/ui/form";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
-import axios from "axios";
-import emailjs from '@emailjs/browser';
+import { ContactFormData } from "../lib/types";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,8 +33,10 @@ const formSchema = z.object({
 
 export default function Contact() {
   const [message, setMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ContactFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -46,73 +45,49 @@ export default function Contact() {
       message: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const sendNow = async () => {
-      try {
-        const emailBody = `
-          Name: ${values.name}\n
-          Email: ${values.email}\n
-          Subject: ${values.subject}\n
-          Message: ${values.message}
-        `;
-  
-        const templateParams = {
-          from_name: values.name,
-          from_email: values.email,
-          subject: values.subject,
-          message: emailBody,
-          reply_to: values.email
-        };
 
-        await emailjs.send("service_n862uum", "template_3pd20x9", templateParams, {
-          publicKey: process.env.EMAILJS_PUBLIC_KEY,
+  async function onSubmit(values: ContactFormData) {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        );
-  
-        setMessage(true);
-      } catch (error) {
-        console.error("Error:", error);
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send message");
       }
-    };
-  
-    sendNow();
+
+      setMessage(true);
+      form.reset();
+    } catch (error) {
+      setError(
+        "Failed to send message. Please try again or contact me directly."
+      );
+      // Log error for debugging in development only
+      if (process.env.NODE_ENV === "development") {
+        console.error("Contact form error:", error);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <div className="text-white pt-[90px] lg:pt-[130px] bg-black lg:bg-[#15140f] lg:mt-0 mt-[30px]">
       <div className="wrapper">
         <div
           className="responsive justify-between lg:gap-28 lg:items-end relative lg:px-16 pb-16
-                before:content-[''] before:absolute before:w-full before:h-[70%] before:bg-black before:bottom-0 before:left-0 relative z-10"
+                before:content-[''] before:absolute before:w-full before:h-[70%] before:bg-black before:bottom-0 before:left-0 z-10"
         >
           <div className="relative">
             <div className="title text-[48px] lg:text-left text-center font-black mb-5">
-              <h3>Contact Us</h3>
-            </div>
-            <div className="relative">
-              <div className="flex gap-6 my-7">
-                <Image
-                  src="/images/icon-mail.svg"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
-                <div className="relative">
-                  <h6>Email:</h6>
-                  <div>admin@christophergalea.com</div>
-                </div>
-              </div>
-              <div className="flex gap-6 my-7">
-                <Image
-                  src="/images/icon-phone.svg"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
-                <div className="relative">
-                  <h6>WhatsApp:</h6>
-                  <div>+356 9909 7476</div>
-                </div>
-              </div>
+              <h3>Lets Connect</h3>
             </div>
           </div>
           <div className="bg-white p-7 flex-1 text-black relative">
@@ -173,14 +148,15 @@ export default function Contact() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="btn">
-                  Send Message
+                <Button type="submit" className="btn" disabled={isLoading}>
+                  {isLoading ? "Sending..." : "Send Message"}
                 </Button>
                 {message && (
-                  <p className="text-sm text-slate-500">
+                  <p className="text-sm text-green-500">
                     Your message has been sent. Thank you!
                   </p>
                 )}
+                {error && <p className="text-sm text-red-500">{error}</p>}
               </form>
             </Form>
           </div>

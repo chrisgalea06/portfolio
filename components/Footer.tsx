@@ -4,29 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import { FaXTwitter, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
+import { FaLinkedinIn } from "react-icons/fa6";
 import parse from "html-react-parser";
-import { useQuery } from "@tanstack/react-query";
-import { getData } from "@/lib/services";
-import Skeleton from "@/components/Skeleton";
-import ErrorNetwork from "@/components/errorNetwork";
+import portfolioData from "@/lib/portfolio-data";
 
 export default function Footer() {
-  const getQuery = async () => {
-    return await getData("/general?populate=*");
-  };
-  const query = useQuery({
-    queryKey: ["general"],
-    queryFn: getQuery,
-  });
-
-  if (query.isLoading) <></>;
-  const dataContent = query.data?.data.data.attributes;
+  const dataContent = portfolioData.general;
 
   return (
     <div className="relative text-white">
       <Image
-        src="/images/ellipse6.svg"
+        src="/assets/icons/ellipse6.svg"
         width={805}
         height={1252}
         alt="image"
@@ -44,27 +32,45 @@ export default function Footer() {
               </>
             )}
           </div>
-          <div className="flex items-center gap-7">
-            {dataContent?.facebook && (
-              <Link href={dataContent?.facebook}>
-                <FaFacebookF />
-              </Link>
-            )}
-            {dataContent?.instagram && (
-              <Link href={dataContent?.instagram}>
-                <FaInstagram />
-              </Link>
-            )}
-            {dataContent?.linkedin && (
-              <Link href={dataContent?.linkedin}>
-                <FaLinkedinIn />
-              </Link>
-            )}
+          <div className="flex items-center gap-7 relative z-10">
+            {dataContent?.facebook &&
+              dataContent.facebook !== "https://www.facebook.com/" && (
+                <Link
+                  href={dataContent.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-400 transition-colors duration-300 text-xl cursor-pointer relative z-20"
+                >
+                  <FaFacebookF />
+                </Link>
+              )}
+            {dataContent?.instagram &&
+              dataContent.instagram !== "https://www.instagram.com/" && (
+                <Link
+                  href={dataContent.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-pink-400 transition-colors duration-300 text-xl cursor-pointer relative z-20"
+                >
+                  <FaInstagram />
+                </Link>
+              )}
+            {dataContent?.linkedin &&
+              dataContent.linkedin !== "https://www.linkedin.com" && (
+                <Link
+                  href={dataContent.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-500 transition-colors duration-300 text-xl cursor-pointer relative z-20"
+                >
+                  <FaLinkedinIn />
+                </Link>
+              )}
           </div>
         </div>
       </div>
       <Image
-        src="/images/ellipse3.svg"
+        src="/assets/icons/ellipse3.svg"
         width={805}
         height={1252}
         alt="image"

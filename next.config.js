@@ -10,6 +10,7 @@ const nextConfig = {
     EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
   },
   reactStrictMode: true,
+  output: "standalone",
   images: {
     remotePatterns: [
       {

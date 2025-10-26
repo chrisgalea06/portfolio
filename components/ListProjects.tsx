@@ -1,35 +1,32 @@
 "use client";
-import React, { ReactNode } from "react";
+import React from "react";
 import parse from "html-react-parser";
-import { useQuery } from "@tanstack/react-query";
-import { getData } from "../lib/services";
-import Skeleton from "../components/Skeleton";
-import ErrorNetwork from "../components/errorNetwork";
 import Link from "next/link";
 import Image from "next/image";
 import _ from "lodash";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import portfolioData, {
+  getProjectImages,
+  getProjectWebsiteUrl,
+} from "../lib/portfolio-data";
+import { ItemProjectProps, ListProjectsProps, ProjectItem } from "../lib/types";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-interface iItemProject {
-  title: string;
-  images: string[];
-  imageWidth: number | string;
-  imageHeight: number | string;
-  children: string | ReactNode;
-  odd?: boolean;
-  link: string;
-}
-
-function ItemProject(props: iItemProject) {
-  const slides = props.images.map((item: any, index: number) => (
+function ItemProject(props: ItemProjectProps) {
+  const slides = props.images.map((item: string, index: number) => (
     <SwiperSlide key={index}>
-      <img src={item} alt={`Slide ${index + 1}`} />
+      <Image
+        src={item}
+        alt={`${props.title} - Slide ${index + 1}`}
+        width={476}
+        height={411}
+        className="w-full h-auto"
+      />
     </SwiperSlide>
   ));
 
@@ -39,14 +36,14 @@ function ItemProject(props: iItemProject) {
     <div
       className={`flex flex-col ${
         props.odd ? "lg:flex-row" : "lg:flex-row-reverse"
-      } gap-14 lg:justify-center my-14 lg:px-0 md:px-16 sm:px-8 px-3`}
+      } gap-14 lg:justify-center my-14 lg:px-0 md:px-8 sm:px-6 px-3`}
     >
       <div
         data-aos={`${props.odd ? "fade-up-left" : "fade-up-right"}`}
         data-aos-delay="300"
         data-aos-duration="1000"
       >
-        <div className="title text-[32px] font-black mb-5">
+        <div className="title text-[32px] md:text-[28px] font-black mb-5">
           <h3>{props.title}</h3>
         </div>
         <div className="text-justify">{props.children}</div>
@@ -88,24 +85,11 @@ function ItemProject(props: iItemProject) {
   );
 }
 
-interface ListProjectsProps {
-  amountToShow?: number;
-}
-
 export default function ListProjects({ amountToShow }: ListProjectsProps) {
   const [limit, setLimit] = React.useState(amountToShow || 3);
-  const getQuery = async () => {
-    return await getData("/project?populate=deep");
-  };
-  const query = useQuery({
-    queryKey: ["project"],
-    queryFn: getQuery,
-  });
 
-  if (query.isLoading) return <></>;
-
-  const dataContent = query.data?.data.data.attributes;
-  const dataAll = dataContent?.list_portfolio;
+  const dataContent = portfolioData.projects;
+  const dataAll = dataContent.portfolio_items;
   const dataFilter = _.slice(dataAll, 0, limit);
 
   return (
@@ -117,21 +101,18 @@ export default function ListProjects({ amountToShow }: ListProjectsProps) {
         data-aos-duration="1000"
       >
         <h2 className="lg:text-left text-center">{dataContent?.title}</h2>
-        {!window.location.href.includes("/projects") && (
-          <Link
-            href="/projects"
-            className="hidden lg:block btn-white cursor-pointer hover:bg-gradient-to-r hover:from-[#00B0ED] hover:to-[#061887] hover:border-2 border-black"
-            //onClick={() => setLimit(dataAll.length)}
-          >
-            {dataContent?.label_button}
-          </Link>
-        )}
+        <Link
+          href="/projects"
+          className="hidden lg:block btn-white cursor-pointer hover:bg-gradient-to-r hover:from-[#00B0ED] hover:to-[#061887] hover:border-2 border-black"
+          //onClick={() => setLimit(dataAll.length)}
+        >
+          {dataContent?.label_button}
+        </Link>
       </div>
       <div className="relative mt-9">
-        {dataFilter?.map((item: any, index: number) => {
-          const imageUrls = item.images.data.map(
-            (image: any) => process.env.URL_MEDIA + image.attributes.url
-          );
+        {dataFilter?.map((item: ProjectItem, index: number) => {
+          const imageUrls = getProjectImages(item.title);
+          const websiteUrl = getProjectWebsiteUrl(item.title);
 
           return (
             <ItemProject
@@ -141,7 +122,7 @@ export default function ListProjects({ amountToShow }: ListProjectsProps) {
               imageWidth={476}
               title={item.title}
               images={imageUrls} // Pass array of image URLs
-              link={item.LinkButton}
+              link={websiteUrl}
             >
               {parse(`${item.description}`)}
             </ItemProject>

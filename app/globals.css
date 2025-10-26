@@ -17,7 +17,7 @@ body {
 }
 
 .wrapper {
-  @apply w-full max-w-[1185px] lg:px-[5px] px-[10px] mx-auto;
+  @apply w-full max-w-[1185px] lg:px-[5px] md:px-[20px] px-[10px] mx-auto;
 }
 
 .btn {
@@ -69,6 +69,9 @@ body {
   @apply flex flex-col lg:flex-row;
 }
 .responsive2 {
+  @apply flex flex-col md:flex-row;
+}
+.responsive-tablet {
   @apply flex flex-col md:flex-row;
 }
 .rectangle {
